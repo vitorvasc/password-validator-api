@@ -20,5 +20,5 @@ func (r *SpecialCharRule) Validate(t string) bool {
 }
 
 func (r *SpecialCharRule) ErrorMessage() string {
-	return "must contain at least one special character (!@#$%^&*()-+)."
+	return "must contain at least one special character: !@#$%^&*()-+"
 }

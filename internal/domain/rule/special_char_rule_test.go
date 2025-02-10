@@ -43,7 +43,7 @@ func (s *SpecialCharRuleTestSuite) TestSpecialCharRule_Validate() {
 
 func (s *SpecialCharRuleTestSuite) TestSpecialCharRule_ErrorMessage() {
 	rule := NewSpecialCharRule()
-	expected := "must not contain repeated characters"
+	expected := "must contain at least one special character: !@#$%^&*()-+"
 
 	if got := rule.ErrorMessage(); got != expected {
 		s.T().Errorf("SpecialCharRule.ErrorMessage() = %v, want %v", got, expected)

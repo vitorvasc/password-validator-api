@@ -38,7 +38,7 @@ func (s *LowercaseRuleTestSuite) TestLowercaseRule_Validate() {
 		{
 			name: "should return false when text contains special characters only",
 			text: "@#$%^&*",
-			want: true,
+			want: false,
 		},
 	}
 

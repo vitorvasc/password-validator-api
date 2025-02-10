@@ -16,12 +16,12 @@ This REST API was built in Go using the [Chi](https://go-chi.io/) framework. Thi
 
 The application provides validators for the following rules:
 
-- MinLengthRule
-- DigitRule
-- LowercaseRule
-- UppercaseRule
-- SpecialCharRule
-- NoRepeatedCharsRule
+- [DigitRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/digit_rule.go)
+- [LowercaseRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/lowercase_rule.go)
+- [MinLengthRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/min_length_rule.go)
+- [NoRepeatedCharsRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/no_repeated_chars_rule.go)
+- [SpecialCharRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/special_char_rule.go)
+- [UppercaseRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/uppercase_rule.go)
 
 ## Project Structure
 
@@ -40,14 +40,22 @@ password-validator-api
 └───internal
 │   └───api
 │       └───handlers
-│           │   password_handler_test.go
 │           │   password_handler.go
+|
 │   └───api
 │       └───domain
+│           └───rule
+│               │   digit_rule.go
+│               │   lowercase_rule.go
+│               │   min_length_rule.go
+│               │   no_repeated_chars_rule.go
+│               │   special_char_rule.go
+│               │   uppercase_rule.go
+|
 │           └───password
-│               │   rules.go
-│               │   validator_test.go
+│               │   validator_option.go
 │               │   validator.go
+|
 ```
 
 ## API Usage
@@ -63,7 +71,19 @@ Content-Type: application/json
 }
 ```
 
+**cURL**:
+
+```
+curl --location 'http://localhost:8080/v1/users/validate-password' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "password": "YourPassword123!"    
+    }'
+```
+
 ### Response
+
+#### Valid password
 
 ```json
 {
@@ -72,11 +92,22 @@ Content-Type: application/json
 }
 ```
 
+#### Invalid password
+
+```json
+{
+    "valid": false,
+    "errors": [
+        "must be at least 9 characters long"
+    ]
+}
+```
+
 ## Getting Started
 
 ### Requirements
 
-- - Go 1.23.0 or higher
+- Go 1.23.0 or higher
 - _(optional)_ Docker
 
 ### Installation
