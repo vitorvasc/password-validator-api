@@ -29,7 +29,7 @@ func (s *PasswordHandlerTestSuite) SetupTest() {
 			rule.NewDigitRule(),
 			rule.NewLowercaseRule(),
 			rule.NewUppercaseRule(),
-			rule.NewSpecialCharRule(),
+			rule.NewSpecialCharRule("!@#$%^&*()-+"),
 			rule.NewNoRepatedCharsRule(),
 		),
 	)
