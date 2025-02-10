@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
+var specialChars = "!@#$%^&*()-+"
+
 type SpecialCharRuleTestSuite struct {
 	suite.Suite
 }
@@ -32,7 +34,7 @@ func (s *SpecialCharRuleTestSuite) TestSpecialCharRule_Validate() {
 		},
 	}
 
-	rule := NewSpecialCharRule()
+	rule := NewSpecialCharRule(specialChars)
 	for _, tt := range tests {
 		s.Run(tt.name, func() {
 			result := rule.Validate(tt.text)
@@ -42,7 +44,7 @@ func (s *SpecialCharRuleTestSuite) TestSpecialCharRule_Validate() {
 }
 
 func (s *SpecialCharRuleTestSuite) TestSpecialCharRule_ErrorMessage() {
-	rule := NewSpecialCharRule()
+	rule := NewSpecialCharRule(specialChars)
 	expected := "must contain at least one special character: !@#$%^&*()-+"
 
 	if got := rule.ErrorMessage(); got != expected {
