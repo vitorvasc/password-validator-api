@@ -1,0 +1,10 @@
+@url=http://localhost:8080
+
+### validate password
+
+POST {{url}}/v1/users/validate-password
+Content-Type: application/json
+
+{
+    "password": "aa"
+}
