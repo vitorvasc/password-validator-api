@@ -2,6 +2,26 @@
 
 This REST API was built in Go using the [Chi](https://go-chi.io/) framework. This is a simple microservice that provides a RESTful API endpoint that can validate passwords based on a set of predefined rules.
 
+## Table of Contents
+
+- [Password Validator API](#password-validator-api)
+    - [Features](#features)
+        - [Sequence Diagram](#sequence-diagram)
+    - [Available validators](#available-validators)
+    - [Project structure](#project-structure)
+    - [API Usage](#api-usage)
+        - [Validate password](#validate-password)
+        - [Response](#response)
+            - [Valid password](#valid-password)
+            - [Invalid password](#invalid-password)
+    - [Getting Started](#getting-started)
+        - [Requirements](#requirements)
+        - [Installation](#installation)
+            - [If you're not using Docker](#if-youre-not-using-docker)
+            - [If you're using Docker](#if-youre-using-docker)
+    - [Testing](#testing)
+    - [Contributing](#contributing)
+
 ## Features
 
 - RESTful API endpoint for password validation (`/v1/users/password-validation`).
@@ -23,7 +43,7 @@ The application provides validators for the following rules:
 - [SpecialCharRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/special_char_rule.go)
 - [UppercaseRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/uppercase_rule.go)
 
-## Project Structure
+## Project structure
 
 ```
 password-validator-api
@@ -60,7 +80,7 @@ password-validator-api
 
 ## API Usage
 
-### Validate Password
+### Validate password
 
 ```bash
 POST /v1/users/validate-password
