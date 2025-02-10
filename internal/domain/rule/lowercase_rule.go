@@ -1,14 +1,14 @@
 package rule
 
-// LowercaseRule validates if the password contains at least one lowercase letter
+// LowercaseRule validates if the string contains at least one lowercase letter
 type LowercaseRule struct{}
 
 func NewLowercaseRule() Rule {
 	return &LowercaseRule{}
 }
 
-func (r *LowercaseRule) Validate(password string) bool {
-	for _, char := range password {
+func (r *LowercaseRule) Validate(t string) bool {
+	for _, char := range t {
 		if char >= 'a' && char <= 'z' {
 			return true
 		}
@@ -17,5 +17,5 @@ func (r *LowercaseRule) Validate(password string) bool {
 }
 
 func (r *LowercaseRule) ErrorMessage() string {
-	return "Password must contain at least one lowercase letter."
+	return "must contain at least one lowercase letter"
 }

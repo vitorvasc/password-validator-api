@@ -1,15 +1,15 @@
 package rule
 
-// NoRepeatedCharsRule validates if the password contains no repeated characters
+// NoRepeatedCharsRule validates if the string contains no repeated characters
 type NoRepeatedCharsRule struct{}
 
 func NewNoRepatedCharsRule() Rule {
 	return &NoRepeatedCharsRule{}
 }
 
-func (r *NoRepeatedCharsRule) Validate(password string) bool {
+func (r *NoRepeatedCharsRule) Validate(t string) bool {
 	seen := make(map[rune]bool)
-	for _, char := range password {
+	for _, char := range t {
 		if seen[char] {
 			return false
 		}
@@ -19,5 +19,5 @@ func (r *NoRepeatedCharsRule) Validate(password string) bool {
 }
 
 func (r *NoRepeatedCharsRule) ErrorMessage() string {
-	return "The password must not contain repeated characters."
+	return "must not contain repeated characters"
 }
