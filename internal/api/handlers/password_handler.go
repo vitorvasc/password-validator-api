@@ -4,14 +4,14 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/vitorvasc/api-password-validator/internal/domain/password"
+	"github.com/vitorvasc/api-password-validator/internal/domain/validator"
 )
 
 type PasswordHandler struct {
-	validator *password.Validator
+	validator *validator.Validator
 }
 
-func NewPasswordHandler(validator *password.Validator) *PasswordHandler {
+func NewPasswordHandler(validator *validator.Validator) *PasswordHandler {
 	return &PasswordHandler{validator}
 }
 

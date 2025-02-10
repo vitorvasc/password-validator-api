@@ -1,9 +1,10 @@
-package password
+package validator
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/suite"
+	domain "github.com/vitorvasc/api-password-validator/internal/domain/rule"
 )
 
 type ValidatorTestSuite struct {
@@ -15,10 +16,15 @@ func TestValidatorSuite(t *testing.T) {
 }
 
 func (s *ValidatorTestSuite) TestNewValidator() {
-	validator := NewValidator()
+	// Create a mock rule for testing
+	mockRule := struct{ domain.Rule }{}
+
+	validator := NewValidator(
+		WithRules(mockRule),
+	)
 
 	s.NotNil(validator)
-	s.Len(validator.rules, 6)
+	s.Len(validator.rules, 1)
 }
 
 func (s *ValidatorTestSuite) TestAddRule() {
@@ -26,7 +32,7 @@ func (s *ValidatorTestSuite) TestAddRule() {
 	initialRulesCount := len(validator.rules)
 
 	// Create a mock rule for testing
-	mockRule := struct{ Rule }{}
+	mockRule := struct{ domain.Rule }{}
 
 	validator.AddRule(mockRule)
 

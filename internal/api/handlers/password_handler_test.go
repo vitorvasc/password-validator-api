@@ -8,12 +8,13 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/suite"
-	"github.com/vitorvasc/api-password-validator/internal/domain/password"
+	"github.com/vitorvasc/api-password-validator/internal/domain/rule"
+	"github.com/vitorvasc/api-password-validator/internal/domain/validator"
 )
 
 type PasswordHandlerTestSuite struct {
 	suite.Suite
-	validator *password.Validator
+	validator *validator.Validator
 	handler   *PasswordHandler
 }
 
@@ -22,7 +23,16 @@ func TestPasswordHandlerSuite(t *testing.T) {
 }
 
 func (s *PasswordHandlerTestSuite) SetupTest() {
-	s.validator = password.NewValidator()
+	s.validator = validator.NewValidator(
+		validator.WithRules(
+			rule.NewMinLengthRule(9),
+			rule.NewDigitRule(),
+			rule.NewLowercaseRule(),
+			rule.NewUppercaseRule(),
+			rule.NewSpecialCharRule(),
+			rule.NewNoRepatedCharsRule(),
+		),
+	)
 	s.handler = NewPasswordHandler(s.validator)
 }
 

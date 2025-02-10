@@ -7,7 +7,8 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 	"github.com/vitorvasc/api-password-validator/internal/api/handlers"
-	"github.com/vitorvasc/api-password-validator/internal/domain/password"
+	"github.com/vitorvasc/api-password-validator/internal/domain/rule"
+	"github.com/vitorvasc/api-password-validator/internal/domain/validator"
 )
 
 func main() {
@@ -19,7 +20,16 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	// Create validator and handler
-	validator := password.NewValidator()
+	validator := validator.NewValidator(
+		validator.WithRules(
+			rule.NewMinLengthRule(9),
+			rule.NewDigitRule(),
+			rule.NewLowercaseRule(),
+			rule.NewUppercaseRule(),
+			rule.NewSpecialCharRule(),
+			rule.NewNoRepatedCharsRule(),
+		),
+	)
 	passwordHandler := handlers.NewPasswordHandler(validator)
 
 	// Routes
