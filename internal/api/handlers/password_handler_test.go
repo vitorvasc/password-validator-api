@@ -92,7 +92,8 @@ func (s *PasswordHandlerTestSuite) TestValidatePassword() {
 			reqBody := ValidatePasswordRequest{
 				Password: tt.password,
 			}
-			bodyBytes, _ := json.Marshal(reqBody)
+			bodyBytes, err := json.Marshal(reqBody)
+			s.NoError(err)
 
 			req := httptest.NewRequest(http.MethodPost, "/v1/users/validate-password", bytes.NewReader(bodyBytes))
 			w := httptest.NewRecorder()
@@ -102,7 +103,8 @@ func (s *PasswordHandlerTestSuite) TestValidatePassword() {
 			s.Equal(tt.expectedCode, w.Code)
 
 			var response ValidatePasswordResponse
-			json.NewDecoder(w.Body).Decode(&response)
+			err = json.NewDecoder(w.Body).Decode(&response)
+			s.NoError(err)
 
 			s.Equal(tt.expectedValid, response.Valid)
 

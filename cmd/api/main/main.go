@@ -33,6 +33,11 @@ func main() {
 	passwordHandler := handlers.NewPasswordHandler(validator)
 
 	// Routes
+	r.Get("/health-check", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte("OK"))
+	})
+
 	r.Route("/v1", func(r chi.Router) {
 		r.Post("/users/validate-password", passwordHandler.ValidatePassword)
 	})
