@@ -62,7 +62,6 @@ password-validator-api
 │       └───handlers
 │           │   password_handler.go
 |
-│   └───api
 │       └───domain
 │           └───rule
 │               │   digit_rule.go
@@ -72,7 +71,7 @@ password-validator-api
 │               │   special_char_rule.go
 │               │   uppercase_rule.go
 |
-│           └───password
+│           └───validator
 │               │   validator_option.go
 │               │   validator.go
 |
