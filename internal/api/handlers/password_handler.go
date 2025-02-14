@@ -31,11 +31,7 @@ func (h *PasswordHandler) ValidatePassword(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	isValid := h.validator.Validate(req.Password)
-	errors := []string{}
-	if !isValid {
-		errors = h.validator.GetValidationErrors(req.Password)
-	}
+	isValid, errors := h.validator.Validate(req.Password)
 
 	response := ValidatePasswordResponse{
 		Valid:  isValid,

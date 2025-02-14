@@ -14,8 +14,7 @@ This REST API was built in Go using the [Chi](https://go-chi.io/) framework. Thi
             - [Invalid password](#invalid-password)
         - [Running the application](#running-the-application)
             - [Requirements](#requirements)
-            - [If you're not using Docker](#if-youre-not-using-docker)
-            - [If you're using Docker](#if-youre-using-docker)
+            - [Installation](#installation)
     - [Testing](#testing)
     - [Contributing](#contributing)
 
@@ -27,7 +26,9 @@ This REST API was built in Go using the [Chi](https://go-chi.io/) framework. Thi
 
 ### Sequence Diagram
 
-<!-- TODO: Add Sequence Diagram -->
+![sequencediagram.org](docs/images/image.png "Sequence Diagram")
+
+_[sequencediagram.org](https://sequencediagram.org/index.html#initialData=C4S2BsFMAIEMAcQFp6wM5oO4HsBOATJAN1nBH1mDwChrVdQBjEVAO2GgGEzJ27YGIZmw4BlSLiIT+g4bHbQACuix58ACXn4ouGUxbyOANVLlKNevpHQASgFcoaWtxC9gSAHwfxkiQC4lAHlRABVoAHoiAEZwuzQJNEjTCmBIFBUcAmoAOWxU6GwpXC4edgAaHyKAgClRQOyAgG8AIlQMTPxmgOaAQQAjEPgATgBCADNsAGtmgF9aSolPD2V2tU1WbX9oEzIUyBXVAgAKXEgARztINGAASmoDjvXN3CWHta0dAIARSEZsfBgtXqtnOl2utDeBCeOiWOzMVFwATheyObUO+Du1HA2Gw8GgADE8NBILBGAALWwOSDUaC07bJcwvLz2RwBFmQAB0yMokFRGTUdzplMcSFhDIRARIu0oIGwrGgpzQDmANLpqtppA47OgUvhsvlY1gICg+HVQvp0oRS3ZaACAHFIMAAKK4XB4ACyVzQsAA5rzBebaTbRV5uRLia6iQBbL2+6lC3imxO0MN4EPLflQj5bXUpfUKq7K6AAMgjbtwTnumY02aZGdWWY2nyUp3ogLq2RBaHgcviEOr0MWSwWiOg6hCIUUXZ7rD7I-TLjcAQATAAGVfQQIAaRyeRghQk0BHZUX7BqHaazVzXWgwFwlzK0GaEnLaBvAG0ALpzIA)_
 
 ### Available validators
 
@@ -117,9 +118,9 @@ curl --location 'http://localhost:8080/v1/users/validate-password' \
 - Go 1.23.0 or higher
 - _(optional)_ Docker
 
-To install the application, follow these steps:
+#### Installation
 
-#### If you're not using Docker
+To install the application, follow these steps:
 
 1. Clone the repository
 
@@ -134,12 +135,6 @@ go run cmd/api/main/main.go
 ```
 
 The server will start on port 8080 by default. 
-
-#### If you're using Docker
-
-```bash
-docker-compose up --build
-```
 
 ## Testing
 

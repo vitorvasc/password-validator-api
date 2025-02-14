@@ -1,6 +1,10 @@
 package validator
 
-import domain "github.com/vitorvasc/api-password-validator/internal/domain/rule"
+import (
+	"fmt"
+
+	domain "github.com/vitorvasc/api-password-validator/internal/domain/rule"
+)
 
 // Validator handles the password validation
 type Validator struct {
@@ -22,22 +26,13 @@ func (v *Validator) AddRule(rule domain.Rule) {
 }
 
 // Validate checks if a password meets all validation rules
-func (v *Validator) Validate(password string) bool {
-	for _, rule := range v.rules {
-		if !rule.Validate(password) {
-			return false
-		}
-	}
-	return true
-}
-
-// GetValidationErrors returns all validation error messages
-func (v *Validator) GetValidationErrors(password string) []string {
-	var errors []string // TODO: Get error message on Validate() method, avoid going through the loop twice
+func (v *Validator) Validate(password string) (bool, []string) {
+	var errors []string
 	for _, rule := range v.rules {
 		if !rule.Validate(password) {
 			errors = append(errors, rule.ErrorMessage())
 		}
 	}
-	return errors
+	fmt.Println(len(errors))
+	return len(errors) == 0, errors
 }
