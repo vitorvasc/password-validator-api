@@ -7,16 +7,13 @@ This REST API was built in Go using the [Chi](https://go-chi.io/) framework. Thi
 - [Password Validator API](#password-validator-api)
     - [Features](#features)
         - [Sequence Diagram](#sequence-diagram)
-    - [Available validators](#available-validators)
-    - [Project structure](#project-structure)
+        - [Available validators](#available-validators)
     - [API Usage](#api-usage)
         - [Validate password](#validate-password)
-        - [Response](#response)
             - [Valid password](#valid-password)
             - [Invalid password](#invalid-password)
-    - [Getting Started](#getting-started)
-        - [Requirements](#requirements)
-        - [Installation](#installation)
+        - [Running the application](#running-the-application)
+            - [Requirements](#requirements)
             - [If you're not using Docker](#if-youre-not-using-docker)
             - [If you're using Docker](#if-youre-using-docker)
     - [Testing](#testing)
@@ -32,7 +29,7 @@ This REST API was built in Go using the [Chi](https://go-chi.io/) framework. Thi
 
 <!-- TODO: Add Sequence Diagram -->
 
-## Available validators
+### Available validators
 
 The application provides validators for the following rules:
 
@@ -43,50 +40,20 @@ The application provides validators for the following rules:
 - [SpecialCharRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/special_char_rule.go)
 - [UppercaseRule](https://github.com/vitorvasc/password-validator-api/blob/main/internal/domain/rule/uppercase_rule.go)
 
-## Project structure
-
-```
-password-validator-api
-│   go.mod    
-│   go.sum    
-│   README.md
-│   request.http    
-│
-└───cmd
-│   └───api
-│       └───main
-│           │   main.go
-│   
-└───internal
-│   └───api
-│       └───handlers
-│           │   password_handler.go
-|
-│       └───domain
-│           └───rule
-│               │   digit_rule.go
-│               │   lowercase_rule.go
-│               │   min_length_rule.go
-│               │   no_repeated_chars_rule.go
-│               │   special_char_rule.go
-│               │   uppercase_rule.go
-|
-│           └───validator
-│               │   validator_option.go
-│               │   validator.go
-|
-```
-
 ## API Usage
 
 ### Validate password
+
+#### Valid password
+
+**Request**:
 
 ```bash
 POST /v1/users/validate-password
 Content-Type: application/json
 
 {
-    "password": "YourPassword123!"
+    "password": "YourPwd123!"
 }
 ```
 
@@ -96,13 +63,11 @@ Content-Type: application/json
 curl --location 'http://localhost:8080/v1/users/validate-password' \
     --header 'Content-Type: application/json' \
     --data '{
-        "password": "YourPassword123!"    
+        "password": "YourPwd123!"  
     }'
 ```
 
-### Response
-
-#### Valid password
+**Response**:
 
 ```json
 {
@@ -113,23 +78,46 @@ curl --location 'http://localhost:8080/v1/users/validate-password' \
 
 #### Invalid password
 
+**Request**:
+
+```bash
+POST /v1/users/validate-password
+Content-Type: application/json
+
+{
+    "password": "YourPassword123!"    
+}
+```
+
+**cURL**:
+
+```
+curl --location 'http://localhost:8080/v1/users/validate-password' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "password": "YourPassword123!"      
+    }'
+```
+
+**Response**:
+
 ```json
 {
     "valid": false,
     "errors": [
-        "must be at least 9 characters long"
+        "must not contain repeated characters"
     ]
 }
 ```
 
-## Getting Started
+### Running the application
 
-### Requirements
+#### Requirements
 
 - Go 1.23.0 or higher
 - _(optional)_ Docker
 
-### Installation
+To install the application, follow these steps:
 
 #### If you're not using Docker
 
